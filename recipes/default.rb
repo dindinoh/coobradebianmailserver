@@ -20,13 +20,6 @@
 node.default[:maildomain] = "testapa.com"
 node.default[:mailuser] = "mailadminuser"
 
-bash "update" do
-  user "root"
-  code <<-EOF
-apt-get update
-EOF
-end
-
 bash "create cert" do
   user "root"
   code <<-EOF
