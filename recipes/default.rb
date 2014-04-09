@@ -17,6 +17,9 @@
 # limitations under the License.
 #
 
+node.default[:maildomain] = "testapa.com"
+node.default[:mailuser] = "mailadminuser"
+
 bash "update" do
   user "root"
   code <<-EOF
@@ -38,3 +41,48 @@ service "postfix" do
   action :stop
 end
 
+template "/etc/postfix/main.cf" do
+  source "main.cf.erb"
+  owner "root"
+  group "root"
+  mode 0644
+end
+
+cookbook_file "/etc/postfix/master.cf" do
+  source "master.cf"
+  mode 0644
+  owner "root"
+  group "root"
+end
+
+template "/etc/aliases" do
+  source "aliases.erb"
+  owner "root"
+  group "root"
+  mode 0644
+end
+
+package "dovecot-core"
+package "dovecot-imapd"
+
+cookbook_file "/etc/dovecot/dovecot.conf" do
+  source "dovecot.conf"
+  mode 0644
+  owner "root"
+  group "root"
+end
+
+bash "running newaliases" do
+  user "root"
+  code <<-EOF
+newaliases
+EOF
+end
+
+service "postfix" do
+  action :start
+end
+
+service "dovecot" do
+  action :start
+end
