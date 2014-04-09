@@ -23,7 +23,7 @@ node.default[:mailuser] = "mailadminuser"
 bash "create cert" do
   user "root"
   code <<-EOF
-echo "echo -e "SE\n\n\n\n\n\n\n"" | sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/mail.key -out /etc/ssl/certs/mailcert.pem
+echo -e "SE\n\n\n\n\n\n\n" | sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/mail.key -out /etc/ssl/certs/mailcert.pem
 EOF
  not_if { ::File.exists?("/etc/ssl/private/mail.key") }
 end
