@@ -57,6 +57,7 @@ end
 
 package "dovecot-core"
 package "dovecot-imapd"
+package "procmail"
 
 cookbook_file "/etc/dovecot/dovecot.conf" do
   source "dovecot.conf"
