@@ -17,13 +17,13 @@
 # limitations under the License.
 #
 
-node.default[:maildomain] = "testapa.com"
-node.default[:mailuser] = "mailadminuser"
+node.default[:maildomain] = "coobramailserver.com"
+node.default[:mailuser] = "coobra"
 
 bash "create cert" do
   user "root"
   code <<-EOF
-echo -e "SE\n\n\n\n\n\n\n" | sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/mail.key -out /etc/ssl/certs/mailcert.pem
+echo -e "SE\n\n\n\n#{node.default[:maildomain]}\n" | sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/mail.key -out /etc/ssl/certs/mailcert.pem
 EOF
  not_if { ::File.exists?("/etc/ssl/private/mail.key") }
 end
@@ -73,6 +73,10 @@ newaliases
 EOF
 end
 
+group "mail" do
+  members "dovecot"
+end
+
 service "postfix" do
   action :start
 end
@@ -80,3 +84,12 @@ end
 service "dovecot" do
   action :start
 end
+
+service "dovecot" do
+  action :stop
+end
+
+service "dovecot" do
+  action :start
+end
+
