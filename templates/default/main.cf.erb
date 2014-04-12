@@ -30,7 +30,7 @@ smtpd_tls_protocols = !SSLv2, !SSLv3
 # information on enabling SSL in the smtp client.
 
 #smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-myhostname = packer-debian-7.4-amd64
+myhostname = <%= node[:maildomain] %>
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 #myorigin = 

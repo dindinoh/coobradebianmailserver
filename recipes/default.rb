@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-node.default[:maildomain] = "coobramailserver.com"
-node.default[:mailuser] = "coobra"
+node.default[:maildomain] = "coobradomain"
+node.default[:mailuser] = "coobrauser"
 
 bash "create cert" do
   user "root"
