@@ -9,7 +9,7 @@ then
     mv coobradebianmailserver cookbooks/
     echo "cookbook_path '$(pwd)/cookbooks'" > solo.rb
     curl -L https://www.opscode.com/chef/install.sh | sudo bash
-    sudo chef-solo -c ./solo.rb coobradebianmailserver::default
+    sudo chef-solo -c ./solo.rb -o coobradebianmailserver::default
 else
     echo "example: runme.sh maildomainname youruseraccountontheserver"
 fi
