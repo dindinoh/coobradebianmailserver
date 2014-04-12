@@ -5,7 +5,7 @@ Coobras automatic debian mailserver setup.
 
 Requirements
 ============
-Debian 7.* and running as a user with sudo rights.
+Debian stable and running as a user with sudo rights.
 
 Usage
 =====
